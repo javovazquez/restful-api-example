@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RestfulApiExample.Common\RestfulApiExample.Common.csproj" />
+    <ProjectReference Include="..\RestfulApiExample.Entities\RestfulApiExample.Entities.csproj" />
+    <ProjectReference Include="..\RestfulApiExample.Repository\RestfulApiExample.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
