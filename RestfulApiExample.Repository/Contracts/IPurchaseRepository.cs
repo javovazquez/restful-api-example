@@ -13,5 +13,7 @@ namespace RestfulApiExample.Repository.Contracts
         Task<Entities.Purchase> AddAsync(Entities.Purchase purchase);
         Task<Entities.Purchase> UpdateAsync(Entities.Purchase purchase);
         Task<Entities.Purchase> RemoveAsync(Guid purchaseId);
+
+        int CountByCustomerId(Guid customerId);
     }
 }

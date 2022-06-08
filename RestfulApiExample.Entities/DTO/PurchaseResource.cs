@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestfulApiExample.Entities
+namespace RestfulApiExample.Entities.DTO
 {
-    public class Purchase
+    public class PurchaseResource: Utilities.LinkResource
     {
-        public Purchase()
+        public PurchaseResource(): base()
         {
 
         }

@@ -17,6 +17,7 @@ namespace RestfulApiExample
             // Managers
             services.AddTransient<ICustomerManager, CustomerManager>();
             services.AddTransient<IPurchaseManager, PurchaseManager>();
+            services.AddTransient<ILoyaltyDiscountManager, LoyaltyDiscountManager>();
 
             return services;
         }

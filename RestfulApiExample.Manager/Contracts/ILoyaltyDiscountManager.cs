@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace RestfulApiExample.Manager.Contracts
 {
-    public interface IPurchaseManager
+    public interface ILoyaltyDiscountManager
     {
-        Task<Entities.Purchase> CreatePurchaseAsync(Entities.DTO.CreatePurchaseRequest request);
+        decimal CalculateDiscountByPurchases(int purchaseCounter, decimal cost);
     }
 }

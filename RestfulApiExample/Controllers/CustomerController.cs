@@ -10,11 +10,28 @@ namespace RestfulApiExample.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
+        #region Dependencies
+
         private readonly ICustomerRepository CustomerRepository;
         private readonly ICustomerManager CustomerManager;
         private readonly LinkGenerator LinkGenerator;
         private readonly ILogger<CustomerController> Logger;
-        
+
+        #endregion
+
+        #region RouteNames
+
+        public const string GetCustomersRouteName = "GetCustomers";
+        public const string GetCustomerRouteName = "GetCustomer";
+        public const string CreateCustomerRouteName = "CreateCustomer";
+        public const string UpdateCustomerRouteName = "UpdateCustomer";
+        public const string DeleteCustomerRouteName = "DeleteCustomer";
+        public const string GetPurchasesByCustomerRouteName = "GetPurchasesByCustomer";
+
+        #endregion
+
+        #region Constructor
+
         public CustomerController(
             ICustomerRepository customerRepository, 
             ICustomerManager customerManager, 
@@ -27,11 +44,13 @@ namespace RestfulApiExample.Controllers
             this.Logger = logger;
         }
 
+        #endregion
+
         #region Public
 
         [HttpGet]
-        [Route("", Name = "GetCustomers")]
-        public async Task<IActionResult> GetAllCustomersAsync(string? search = null, int pageSize = 50, int skip = 50)
+        [Route("", Name = GetCustomersRouteName)]
+        public async Task<IActionResult> GetAllCustomersAsync(string? search = null, int pageSize = 50, int skip = 0)
         {
             try
             {
@@ -49,7 +68,7 @@ namespace RestfulApiExample.Controllers
         }
 
         [HttpGet]
-        [Route("{id}", Name = "GetCustomer")]
+        [Route("{id}", Name = GetCustomerRouteName)]
         public async Task<IActionResult> GetCustomerByIdAsync([FromRoute]Guid id)
         {
             try
@@ -73,7 +92,7 @@ namespace RestfulApiExample.Controllers
         }
 
         [HttpPost]
-        [Route("", Name = "CreateCustomer")]
+        [Route("", Name = CreateCustomerRouteName)]
         public async Task<IActionResult> CreateCustomerAsync([FromBody]Entities.DTO.CreateCustomerRequest request)
         {
             try
@@ -96,7 +115,7 @@ namespace RestfulApiExample.Controllers
         }
 
         [HttpPut]
-        [Route("{id}", Name = "UpdateCustomer")]
+        [Route("{id}", Name = UpdateCustomerRouteName)]
         public async Task<IActionResult> UpdateCustomerAsync([FromRoute]Guid id, [FromBody]Entities.DTO.UpdateCustomerRequest request)
         {
             try
@@ -114,12 +133,12 @@ namespace RestfulApiExample.Controllers
             catch (Exception error)
             {
                 this.Logger.LogError(error, $"An error ocurred updating customer {id}");
-                return StatusCode(503, "Service unavailable");
+                return StatusCode(503, new { message = "Service unavailable" });
             }
         }
 
         [HttpDelete]
-        [Route("{id}", Name = "DeleteCustomer")]
+        [Route("{id}", Name = DeleteCustomerRouteName)]
         public async Task<IActionResult> DeleteCustomerAsync([FromRoute]Guid id)
         {
             try
@@ -135,6 +154,26 @@ namespace RestfulApiExample.Controllers
             catch (Exception error)
             {
                 this.Logger.LogError(error, $"An error ocurred deleting customer {id}");
+                return StatusCode(503, new { message = "Service unavailable" });
+            }
+        }
+
+        [HttpGet]
+        [Route("{id}/purchases", Name = GetPurchasesByCustomerRouteName)]
+        public IActionResult GetPurchases([FromRoute] Guid id, int pageSize = 50, int skip = 0)
+        {
+            try
+            {
+                return this.RedirectToRoute(PurchaseController.GetPurchasesRouteName, new { customerId = id, pageSize = pageSize, skip = skip });
+            }
+            catch (Common.Exceptions.NotFoundException notFound)
+            {
+                this.Logger.LogError(notFound, notFound.Message);
+                return NotFound(new { message = notFound.Message });
+            }
+            catch (Exception error)
+            {
+                this.Logger.LogError(error, $"An error ocurred getting purchases by customer {id}");
                 return StatusCode(503, new { message = "Service unavailable" });
             }
         }
@@ -170,7 +209,7 @@ namespace RestfulApiExample.Controllers
                 new Link(
                     this.LinkGenerator.GetUriByName(
                         HttpContext,
-                        "GetCustomer",
+                        GetCustomerRouteName,
                         values: new { id = customer.Id}),
                     "self",
                     HttpMethods.Get
@@ -178,7 +217,7 @@ namespace RestfulApiExample.Controllers
                 new Link(
                     this.LinkGenerator.GetUriByName(
                         HttpContext,
-                        "UpdateCustomer",
+                        UpdateCustomerRouteName,
                         values: new { id = customer.Id}),
                     "update_customer",
                     HttpMethods.Put
@@ -186,10 +225,18 @@ namespace RestfulApiExample.Controllers
                 new Link(
                     this.LinkGenerator.GetUriByName(
                         HttpContext,
-                        "DeleteCustomer",
+                        DeleteCustomerRouteName,
                         values: new { id = customer.Id}),
                     "delete_customer",
                     HttpMethods.Delete
+                    ),
+                new Link(
+                    this.LinkGenerator.GetUriByName(
+                        HttpContext,
+                        GetPurchasesByCustomerRouteName,
+                        values: new { id = customer.Id}),
+                    "get_customer_purchases",
+                    HttpMethods.Get
                     ),
             };
 

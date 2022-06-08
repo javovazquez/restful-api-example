@@ -107,5 +107,12 @@ namespace RestfulApiExample.Repository
 
         }
 
+        public int CountByCustomerId(Guid customerId)
+        {
+            return this.data.Values
+                .Where(e => e.CustomerId == customerId)
+                .Count();
+        }
+
     }
 }
