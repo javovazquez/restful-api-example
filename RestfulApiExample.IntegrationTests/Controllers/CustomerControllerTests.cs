@@ -22,9 +22,6 @@ namespace RestfulApiExample.IntegrationTests.Controllers
     public class CustomerControllerTests
     {
         private HttpClient httpClient = null!;
-        private readonly Mock<ICustomerRepository> customerRepository = new();
-        private readonly Mock<ICustomerManager> customerManager = new();
-
         public CustomerControllerTests()
         {
             var webAppFactory = new WebApplicationFactory<Program>()
@@ -32,8 +29,6 @@ namespace RestfulApiExample.IntegrationTests.Controllers
                    builder.UseTestServer()
                        .ConfigureServices(services =>
                        {
-                           //services.AddSingleton(this.customerRepository.Object);
-                           //services.AddSingleton(this.customerManager.Object);
                        });
                });
 
