@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestfulApiExample.Repositor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestfulApiExample.Common", "RestfulApiExample.Common\RestfulApiExample.Common.csproj", "{5A1BCE20-8596-43A6-8D83-59AB5C9FE241}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestfulApiExample.UnitTests", "RestfulApiExample.UnitTests\RestfulApiExample.UnitTests.csproj", "{BC7E5E75-7DC7-4859-AAFA-C603D009AF42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestfulApiExample.UnitTests", "RestfulApiExample.UnitTests\RestfulApiExample.UnitTests.csproj", "{BC7E5E75-7DC7-4859-AAFA-C603D009AF42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestfulApiExample.IntegrationTests", "RestfulApiExample.IntegrationTests\RestfulApiExample.IntegrationTests.csproj", "{E3AEC5DD-7FF8-4FB5-977A-9AC65254C440}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{BC7E5E75-7DC7-4859-AAFA-C603D009AF42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC7E5E75-7DC7-4859-AAFA-C603D009AF42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC7E5E75-7DC7-4859-AAFA-C603D009AF42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3AEC5DD-7FF8-4FB5-977A-9AC65254C440}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3AEC5DD-7FF8-4FB5-977A-9AC65254C440}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3AEC5DD-7FF8-4FB5-977A-9AC65254C440}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3AEC5DD-7FF8-4FB5-977A-9AC65254C440}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
