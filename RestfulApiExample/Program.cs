@@ -2,7 +2,7 @@ using RestfulApiExample;
 
 namespace RestfulApiExample
 {
-    public static class Program
+    public class Program
     {
         public static void Main(string[] args)
         {
