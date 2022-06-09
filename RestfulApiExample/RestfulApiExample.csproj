@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <StartupObject>RestfulApiExample.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +14,7 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="$(Assembly).IntegrationTests"/>
+		<InternalsVisibleTo Include="$(Assembly).IntegrationTests" />
 	</ItemGroup>
 
   <ItemGroup>
